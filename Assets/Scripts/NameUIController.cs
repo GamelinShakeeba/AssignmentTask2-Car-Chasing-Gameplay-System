@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class NameUIController : MonoBehaviour
 {
     public Text playerName;
-    public Text lapDisplay;
+    public Text rankDisplay;
     public Transform target;
     CanvasGroup canvasGroup;
     public Renderer carRend;
@@ -37,6 +37,6 @@ public class NameUIController : MonoBehaviour
         Leaderboard.SetPosition(carRego, cpManager.lap, cpManager.checkPoint, cpManager.timeEntered);
         string position = Leaderboard.GetPosition(carRego);
 
-        lapDisplay.text = position;// + " " + cpManager.lap + " (" + cpManager.checkPoint + ")";
+        rankDisplay.text = position;
     }
 }

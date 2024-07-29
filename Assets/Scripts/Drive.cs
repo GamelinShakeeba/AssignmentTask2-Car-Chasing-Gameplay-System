@@ -7,15 +7,18 @@ public class Drive : MonoBehaviour
 {
     public WheelCollider[] WCs;
     public GameObject[] Wheels;
-    public float torque = 200;
+    public float torque = 450;
     public float maxSteerAngle = 30;
-    public float maxBrakeTorque = 4000;
+    public float maxBrakeTorque = 8000;
 
     public AudioSource skidSound;
     public AudioSource highAccel;
 
     public Transform skidTrialPrefab;
     Transform[] skidTrials = new Transform[4];
+    public float skidThreshold = 0.4f;  // Threshold for detecting skid
+    public float skidSoundCooldown = 0.5f; // Cooldown time in seconds
+    private float lastSkidTime = 0f;
 
     public ParticleSystem smokePrefab;
     ParticleSystem[] skidSmoke = new ParticleSystem[4];
@@ -31,7 +34,7 @@ public class Drive : MonoBehaviour
     float rpm;
     int currentGear = 1;
     float currentGearPerc;
-    public float maxSpeed = 200;
+    public float maxSpeed = 500;
 
     public GameObject playerNamePrefab;
 
@@ -77,7 +80,7 @@ public class Drive : MonoBehaviour
 
     void SmokeInstantiate()
     {
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             skidSmoke[i] = Instantiate(smokePrefab);
             skidSmoke[i].Stop();
@@ -143,31 +146,42 @@ public class Drive : MonoBehaviour
     public void CheckForSkid()
     {
         int numSkidding = 0;
-        for(int i = 0; i < 4; i++) 
+        bool isSkidding = false;
+
+        for (int i = 0; i < 4; i++)
         {
             WheelHit wheelHit;
             WCs[i].GetGroundHit(out wheelHit);
 
-            if(Mathf.Abs(wheelHit.forwardSlip) >= 0.4f || Mathf.Abs(wheelHit.sidewaysSlip) >= 0.4f)
+            // Adjusted thresholds for skid detection
+            if (Mathf.Abs(wheelHit.forwardSlip) >= skidThreshold || Mathf.Abs(wheelHit.sidewaysSlip) >= skidThreshold)
             {
                 numSkidding++;
-                if(!skidSound.isPlaying)
-                {
-                    skidSound.Play();
-                }
-                //StartSkidTrial(i);
+                isSkidding = true;
+
+                // Emit skid smoke
                 skidSmoke[i].transform.position = WCs[i].transform.position - WCs[i].transform.up * WCs[i].radius;
                 skidSmoke[i].Emit(1);
             }
-            else
+        }
+        // Manage skid sound
+        if (isSkidding)
+        {
+            if (Time.time - lastSkidTime > skidSoundCooldown)
             {
-                //EndSkidTrial(i);
+                if (!skidSound.isPlaying)
+                {
+                    skidSound.Play();
+                }
+                lastSkidTime = Time.time;
             }
         }
-
-        if(numSkidding == 0 && skidSound.isPlaying)
+        else
         {
-            skidSound.Stop();
+            if (skidSound.isPlaying)
+            {
+                skidSound.Stop();
+            }
         }
     }
 }

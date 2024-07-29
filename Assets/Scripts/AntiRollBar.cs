@@ -14,6 +14,7 @@ public class AntiRollBar : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -0.5f, 0);
     }
 
     void GroundWheels(WheelCollider WL, WheelCollider WR)

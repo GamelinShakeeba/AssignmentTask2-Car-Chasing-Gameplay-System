@@ -11,13 +11,13 @@ public class AvoidDetector : MonoBehaviour
 
     private void OnCollisionExit(Collision col)
     {
-        if (col.gameObject.tag != "car") return;
+        if (col.gameObject.tag != "car" || col.gameObject.tag != "Player") return;
         avoidTime = 0;
     }
 
     private void OnCollisionStay(Collision col)
     {
-        if (col.gameObject.tag != "car") return;
+        if (col.gameObject.tag != "car" || col.gameObject.tag != "Player") return;
 
         Rigidbody otherCar = col.rigidbody;
         avoidTime = Time.time + avoidLength;

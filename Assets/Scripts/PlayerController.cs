@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     CheckpointManager cpm;
     float finishSteer;
+
     void ResetLayer()
     {
         ds.rb.gameObject.layer = 0;

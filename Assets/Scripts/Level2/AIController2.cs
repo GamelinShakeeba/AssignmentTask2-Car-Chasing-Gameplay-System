@@ -56,14 +56,6 @@ public class AIController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!RaceMonitor.racing)
-        //{
-        //    lastTimeMoving = Time.time;
-        //    return;
-        //}
-
-        
-
         ProgressTracker();
 
         Vector3 localTarget;
@@ -73,17 +65,6 @@ public class AIController2 : MonoBehaviour
         {
             lastTimeMoving = Time.time;
         }
-
-        //if (Time.time > lastTimeMoving + 4 || ds.rb.gameObject.transform.position.y < -5)
-        //{
-        //    ds.rb.gameObject.transform.position = cpm.lastCP.transform.position + Vector3.up * 2;
-        //    ds.rb.gameObject.transform.rotation = cpm.lastCP.transform.rotation;
-        //    tracker.transform.position = cpm.lastCP.transform.position;
-        //    ds.rb.gameObject.layer = 8;
-        //    this.GetComponent<Ghost>().enabled = true;
-        //    Invoke("ResetLayer", 3);
-        //}
-
         if (Time.time < ds.rb.GetComponent<AvoidDetector>().avoidTime)
         {
             localTarget = tracker.transform.right * ds.rb.GetComponent<AvoidDetector>().avoidPath;

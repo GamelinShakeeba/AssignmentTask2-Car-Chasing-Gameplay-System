@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a370bf2b0f82b3e419a29cfcc0f1d654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: {fileID: 0}
-  lapDisplay: {fileID: 7104409298007328663}
+  playerName: {fileID: 9072454266276989949}
+  rankDisplay: {fileID: 7104409298007328663}
   target: {fileID: 0}
   carRend: {fileID: 0}
 --- !u!225 &4120777268836109104
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 7104409298007328663}
   - component: {fileID: 1463883412360282622}
   m_Layer: 5
-  m_Name: Laps
+  m_Name: Ranks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

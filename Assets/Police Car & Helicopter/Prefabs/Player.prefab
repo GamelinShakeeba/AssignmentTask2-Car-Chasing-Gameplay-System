@@ -895,11 +895,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469d832c0074a514993fa9de15eba314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTarget: {fileID: 0}
+  policeCarPrefab: {fileID: 0}
   imgLevel1: {fileID: 0}
   imgLevel2: {fileID: 0}
   imgLevel3: {fileID: 0}
-  policeCarPrefab: {fileID: 0}
-  playerTarget: {fileID: 0}
+  policeCars: []
 --- !u!114 &4940139479447510754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,6 +913,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5937fce4eaf545b46ac52834d94f5672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evasionPanel: {fileID: 0}
+  evasionTimer: {fileID: 0}
+  timerImage: {fileID: 0}
 --- !u!1 &5259853409190234636
 GameObject:
   m_ObjectHideFlags: 0
